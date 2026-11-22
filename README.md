@@ -7,21 +7,27 @@ question in every unlocked topic has graduated round 1.
 
 ## Start the app
 
+**Windows:** double-click `start.bat`.
+**macOS / Linux:** run `./start.sh`.
+
+The first run sets everything up -- it creates the virtualenv, installs the
+dependencies, builds `dsa_tracker.db` from `seed_data.py`, starts the server at
+**http://localhost:8000** and opens it in your browser. Later runs skip straight
+to starting the server. Stop it by closing the window or pressing `Ctrl+C`.
+
+New here? `GUIDE.md` is a fuller walkthrough of what the app does and how to
+use it day to day.
+
+If you'd rather drive it by hand, or the launcher misbehaves:
+
 ```
-cd C:\Users\FCI\dev\DSA
+python -m venv venv
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
 .\venv\Scripts\python.exe app.py
 ```
 
-This starts the server at **http://localhost:8000** and opens it in your
-browser automatically. Stop it with `Ctrl+C` in the terminal it's running in.
-
-If the `venv` folder is ever missing or broken, recreate it:
-
-```
-cd C:\Users\FCI\dev\DSA
-python -m venv venv
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
-```
+(On macOS and Linux that interpreter is `./venv/bin/python`.) Deleting the
+`venv` folder and re-running the launcher rebuilds it from scratch.
 
 ## Tech stack
 
@@ -32,12 +38,15 @@ python -m venv venv
 ## Project structure
 
 ```
+start.bat       One-click launcher for Windows (sets up on first run)
+start.sh        Same, for macOS and Linux
 app.py          FastAPI routes, static file serving, entrypoint (python app.py)
 db.py           Schema definition + first-run seeding
 logic.py        All scheduling/spaced-repetition rules (pure functions, no HTTP)
 seed_data.py    The syllabus loaded into the DB the first time it's created
 static/         index.html, app.js, style.css -- the whole frontend
 dsa_tracker.db  Your actual data. Back this up if you care about your progress.
+GUIDE.md        Walkthrough for someone picking the app up for the first time
 venv/           Local virtualenv (fastapi, uvicorn) -- not synced/committed
 ```
 
@@ -68,14 +77,13 @@ file somewhere first if you want a backup.
 
 ## If something breaks or you want a change
 
-Paste this into a Claude Code session in this project directory
-(`C:\Users\FCI\dev\DSA`):
+Paste this into a Claude Code session in this project directory:
 
 > I'm using the DSA Tracker app in this directory (FastAPI + SQLite backend
 > in `app.py`/`db.py`/`logic.py`, vanilla JS frontend in `static/`). Read
 > `README.md` for how it works. [Describe the bug you're seeing, or the
 > change/feature you want.] Start the app with
-> `.\venv\Scripts\python.exe app.py` to test your fix before confirming
+> `start.bat` (or `./start.sh`) to test your fix before confirming
 > it's done.
 
 Being specific helps a lot -- e.g. "the 'Regenerate' button on Today's 5
