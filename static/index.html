@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DSA Tracker</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-left">
+    <h1>DSA Tracker</h1>
+    <span id="round-badge" class="round-badge">Round -</span>
+  </div>
+  <div class="topbar-right">
+    <span id="today-date"></span>
+    <button id="theme-toggle" class="btn btn-ghost" title="Toggle dark mode">&#9789;</button>
+  </div>
+</header>
+
+<div id="congrats-banner" class="banner banner-success hidden">
+  🎉 Round 1 complete across all unlocked topics! Round 2 (implementation) starts now.
+</div>
+
+<div id="weekend-banner" class="banner banner-info hidden"></div>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="today">Today's 5</button>
+  <button class="tab-btn" data-tab="progress">Progress</button>
+  <button class="tab-btn" data-tab="topics">Topic Manager</button>
+  <button class="tab-btn" data-tab="editor">Question Editor</button>
+</nav>
+
+<main>
+  <section id="tab-today" class="tab-panel active">
+    <div class="section-header">
+      <h2>Today's 5</h2>
+      <button id="regenerate-btn" class="btn btn-ghost">Regenerate</button>
+    </div>
+    <div id="today-list" class="card-list"></div>
+  </section>
+
+  <section id="tab-progress" class="tab-panel">
+    <h2>Progress Overview</h2>
+    <div id="overall-progress" class="overall-progress"></div>
+    <div id="progress-list" class="progress-list"></div>
+  </section>
+
+  <section id="tab-topics" class="tab-panel">
+    <h2>Topic Manager</h2>
+    <div class="topic-columns">
+      <div class="topic-col">
+        <h3>Active</h3>
+        <div id="topics-active" class="topic-col-list"></div>
+      </div>
+      <div class="topic-col">
+        <h3>Pending first pass</h3>
+        <div id="topics-pending" class="topic-col-list"></div>
+      </div>
+      <div class="topic-col">
+        <h3>Locked</h3>
+        <div id="topics-locked" class="topic-col-list"></div>
+      </div>
+      <div class="topic-col">
+        <h3>Done</h3>
+        <div id="topics-done" class="topic-col-list"></div>
+      </div>
+    </div>
+    <div class="add-form">
+      <h3>Add topic</h3>
+      <form id="add-topic-form">
+        <input type="text" id="new-topic-name" placeholder="Topic name" required />
+        <input type="text" id="new-topic-note" placeholder="Note (optional)" />
+        <select id="new-topic-status">
+          <option value="locked">locked</option>
+          <option value="active">active</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Add topic</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="tab-editor" class="tab-panel">
+    <h2>Question Editor</h2>
+    <div class="editor-controls">
+      <label for="editor-topic-select">Topic:</label>
+      <select id="editor-topic-select"></select>
+    </div>
+    <div id="editor-question-list" class="card-list"></div>
+    <div class="add-form">
+      <h3>Add question to this topic</h3>
+      <form id="add-question-form">
+        <input type="text" id="new-question-title" placeholder="Title" required />
+        <input type="url" id="new-question-url" placeholder="URL (optional)" />
+        <input type="text" id="new-question-difficulty" placeholder="Difficulty (optional)" />
+        <button type="submit" class="btn btn-primary">Add question</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

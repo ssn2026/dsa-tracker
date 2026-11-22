@@ -1,0 +1,18 @@
+# Local virtualenv
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Your personal data -- never share this
+dsa_tracker.db
+*.backup-*.db
+
+# Logs
+*.log
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
